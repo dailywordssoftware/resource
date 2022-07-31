@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaListenerService {
 
-    @KafkaListener(topics = "randomDailyWords", groupId = "dailyWords")
+//    @KafkaListener(topics = "randomDailyWords", groupId = "dailyWords")
     public void listener(RandomWord randomWord) {
         System.out.println("DATA: " + randomWord);
     }
