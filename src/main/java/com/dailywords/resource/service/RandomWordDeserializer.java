@@ -1,19 +1,16 @@
 package com.dailywords.resource.service;
 
-import com.dailywords.resource.domain.RandomWord;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.dailywords.resource.domain.RandomWordData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
 
 import java.io.IOException;
 
-public class RandomWordDeserializer implements Deserializer<RandomWord> {
+public class RandomWordDeserializer implements Deserializer<RandomWordData> {
     @Override
-    public RandomWord deserialize(String s, byte[] bytes) {
+    public RandomWordData deserialize(String s, byte[] bytes) {
         try {
-            return new ObjectMapper().readValue(bytes, RandomWord.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            return new ObjectMapper().readValue(bytes, RandomWordData.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
