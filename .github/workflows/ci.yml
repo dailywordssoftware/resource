@@ -24,8 +24,8 @@ jobs:
         with:
           image: xaganic/dailywords-resource
 #          tags: v1, latest
-          registry: registry-url.io
-          dockerfile: Dockerfile.ci
+          registry: docker.io
+          dockerfile: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 #    steps:
