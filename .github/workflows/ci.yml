@@ -46,8 +46,6 @@ jobs:
 #        ports:
 #          - 29092:29092
     steps:
-      - name: Start Bitname Kafka
-        uses: bbcCorp/kafka-actions@v1
       - uses: actions/checkout@v3
       - name: Set up JDK 11
         env:
@@ -62,6 +60,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
+        uses: bbcCorp/kafka-actions@v1
         run: mvn -B package --file pom.xml
   docker:
     runs-on: ubuntu-latest
