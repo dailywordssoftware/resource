@@ -54,7 +54,7 @@ jobs:
           POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: resource_db
-          KAFKA_HOST: kafka
+#          KAFKA_HOST: kafka
           KAFKA_PORT: 29092
         uses: actions/setup-java@v3
         with:
