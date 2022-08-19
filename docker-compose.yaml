@@ -11,6 +11,8 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+    networks:
+     springboot-postgres-net:
   keycloak_postgres:
     image: postgres
     volumes:
@@ -42,11 +44,15 @@ services:
       #JDBC_PARAMS: "ssl=true"
 
 networks:
+  springboot-postgres-net:
+    driver: bridge
   collector_kafka:
     driver: bridge
     driver_opts:
       com.docker.network.enable_ipv6: "true"
   keycloak:
+    driver: bridge
+  db:
     driver: bridge
 volumes:
   postgres_data:
