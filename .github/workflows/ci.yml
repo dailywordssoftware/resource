@@ -75,6 +75,7 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          addLatest: true
 #  docker:
 #    runs-on: ubuntu-latest
 #    steps:
