@@ -2,6 +2,7 @@ version: '3.1'
 services:
   db:
     image: postgres:14.1-alpine
+    container_name: resource-postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -11,51 +12,16 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
-    networks:
-     springboot-postgres-net:
-  keycloak_postgres:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5433:5433"
-    networks:
-      keycloak:
   keycloak:
-    image: quay.io/keycloak/keycloak:legacy
+    image: ghcr.io/thomasvitale/keycloak:17.0.0-amd64 # Use quay.io/keycloak:17.0.0-legacy on Intel processors
+    container_name: resource-keycloak
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: keycloak_postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
+      - KEYCLOAK_USER=user
+      - KEYCLOAK_PASSWORD=password
     ports:
       - "8080:8080"
-    networks:
-      keycloak:
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "ssl=true"
-
-networks:
-  springboot-postgres-net:
-    driver: bridge
-  collector_kafka:
-    driver: bridge
-    driver_opts:
-      com.docker.network.enable_ipv6: "true"
-  keycloak:
-    driver: bridge
-  db:
-    driver: bridge
 volumes:
-  postgres_data:
-    driver: local
   db:
     driver: local
